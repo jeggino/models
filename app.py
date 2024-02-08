@@ -29,6 +29,12 @@ label = st.selectbox(
    placeholder="Select a label...",
 )
 
+if label is not None:
+  df_grouped_by = dataset.groupby([label])
+
+else:
+  st.stop()
+
 # balance the dataset
 df_grouped_by = dataset.groupby([label])
 df_balanced = df_grouped_by.apply(lambda x: x.sample(df_grouped_by.size().min()).reset_index(drop=True))
