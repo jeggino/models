@@ -118,6 +118,8 @@ df_describe
 
 import altair as alt
 
+st.dataframe(df)
+
 source = df.melt(var_name=["Model","Test size"],value_name="Accuracy")
 
 source["Accuracy"] = source["Accuracy"]*100
