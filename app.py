@@ -35,6 +35,8 @@ if label is not None:
 else:
   st.stop()
 
+"---"
+
 # balance the dataset
 df_grouped_by = dataset.groupby([label])
 df_balanced = df_grouped_by.apply(lambda x: x.sample(df_grouped_by.size().min()).reset_index(drop=True))
