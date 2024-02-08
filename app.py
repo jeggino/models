@@ -53,11 +53,11 @@ encoder = OneHotEncoder()
 standard = StandardScaler()
 
 
-if df_lab is None and df_cont is not None:
+if (len(df_lab.columns) ==  0) and (len(df_cont.columns) != 0):
     
     X = standard.fit_transform(df_cont) 
     
-elif df_lab is not None and df_cont is None:
+if (len(df_lab.columns) !=  0) and (len(df_cont.columns) == 0):
     
     X = encoder.fit_transform(df_lab).toarray()
     
