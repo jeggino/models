@@ -23,9 +23,9 @@ if uploaded_file is not None:
 
   dataset = fetch_data(uploaded_file)
 
-    if st.button("Clear All"):
-      # Clears all st.cache_resource caches:
-      st.cache_resource.clear()
+  if st.button("Clear All"):
+    # Clears all st.cache_resource caches:
+    st.cache_resource.clear()
 
 else:
   st.stop()
