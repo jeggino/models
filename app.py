@@ -12,7 +12,7 @@ import numpy as np
 import streamlit as st
 
 uploaded_file = st.file_uploader("Choose a file")
-
-dataframe = pd.read_csv(uploaded_file)
-
-dataframe
+if uploaded_file is not None:
+  dataframe = pd.read_csv(uploaded_file)
+  
+  dataframe
