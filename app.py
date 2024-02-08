@@ -21,11 +21,10 @@ if uploaded_file is not None:
 else:
   st.stop()
 
-st.write(dataset.columns)
 
 option = st.selectbox(
    "Chose the Label variable",
-  list(dataset.columns),
+  list( dataframe.columns),
    index=None,
    placeholder="Select a label...",
 )
