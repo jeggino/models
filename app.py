@@ -132,3 +132,49 @@ box = alt.Chart(source).mark_boxplot(extent='min-max',size=30,).encode(
 )
 
 st.altair_chart(box, use_container_width=True)
+
+"---"
+
+f"""
+Highest mean: {df_describe.idxmax(axis="columns")["mean"]} ({df_describe.loc["mean",df_describe.idxmax(axis="columns")["mean"]]}) 
+Highest min: {df_describe.idxmax(axis="columns")["min"]} ({df_describe.loc["min",df_describe.idxmax(axis="columns")["min"]]}) 
+Highest max: {df_describe.idxmax(axis="columns")["max"]} ({df_describe.loc["max",df_describe.idxmax(axis="columns")["max"]]})
+Lowest std: {df_describe.idxmin(axis="columns")["std"]} ({df_describe.loc["std",df_describe.idxmin(axis="columns")["std"]]}) 
+"""
+
+"---"
+
+mod, test_size = df_describe.idxmax(axis="columns")["mean"]
+
+# balance the dataset
+df_grouped_by = dataset.groupby(["fetal_health"])
+df_balanced = df_grouped_by.apply(lambda x: x.sample(df_grouped_by.size().min()).reset_index(drop=True))
+df_balanced = df_balanced.droplevel(["fetal_health"])
+
+le = LabelEncoder()
+Y = le.fit_transform(df_balanced.pop("fetal_health"))
+
+standard = StandardScaler()
+df_cont = df_balanced.select_dtypes(exclude="object")
+df_cont = standard.fit_transform(df_cont)
+
+
+encoder = OneHotEncoder()
+df_lab = df_balanced.select_dtypes(include="object")
+df_lab = encoder.fit_transform(df_lab).toarray()
+
+X = np.concatenate((df_cont,df_lab), axis=1)
+
+
+# split data into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=test_size, random_state=None)
+
+# fit model no training data
+model = dict_model[mod]
+model.fit(X_train, y_train)
+
+# make predictions for test data
+y_pred = model.predict(X_test)
+
+f"Test size: {test_size}, model: {mod}"
+pd.crosstab(le.inverse_transform(y_pred),le.inverse_transform(y_test), rownames=['Pred'], colnames=["Real"])
