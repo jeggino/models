@@ -11,27 +11,23 @@ from sklearn import tree
 import numpy as np
 import streamlit as st
 
-@st.cache_data
-def fetch_data(uploaded_file):
-  dataset = pd.read_csv(uploaded_file)
-  return dataset
 
   
 uploaded_file = st.sidebar.file_uploader("Choose a file")
 
 if uploaded_file is not None:
 
-  dataset = fetch_data(uploaded_file)
+  dataset = pd.read_csv(uploaded_file)
 
 else:
   st.stop()
 
 
 label = st.sidebar.selectbox(
-   "Chose the Label variable",
+  "Chose the Label variable",
   list(dataset.columns),
-   index=None,
-   placeholder="Select a label...",
+  index=None,
+  placeholder="Select a label...",
 )
 
 if label is not None:
