@@ -10,7 +10,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn import tree
 import numpy as np
 import streamlit as st
-from streamlit_pandas_profiling import st_profile_report
+import pandas_profiling
 
 
 uploaded_file = st.file_uploader("Choose a file")
