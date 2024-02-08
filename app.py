@@ -36,7 +36,6 @@ if label is not None:
 else:
   st.stop()
 
-"---"
 
 # balance the dataset
 df_grouped_by = dataset.groupby([label])
@@ -124,7 +123,7 @@ source = df.melt()
 source["value"] = source["value"]*100
 
 box = alt.Chart(source).mark_boxplot(extent='min-max',size=30,).encode(
-    x=alt.X("variable_1e:N",title=""),
+    x=alt.X("variable_1:N",title=""),
     y=alt.Y('value:Q',scale=alt.Scale(zero=False),title=""),
     color=alt.Color("variable_0:N").legend(None),
     column='variable_0:N'
