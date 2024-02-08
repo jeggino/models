@@ -1,4 +1,4 @@
 streamlit
 xgboost
 scikit-learn
-treamlit-pandas-profiling
+streamlit-pandas-profiling
