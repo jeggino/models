@@ -18,4 +18,16 @@ if uploaded_file is not None:
   
   dataframe
 
+else:
+  st.stop()
+
+option = st.selectbox(
+   "Chose the Label variable",
+    list(dataset.columns()),
+   index=None,
+   placeholder="Select a label...",
+)
+
+st.write('You selected:', option)
+
 
