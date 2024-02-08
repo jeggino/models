@@ -135,24 +135,43 @@ st.altair_chart(box, use_container_width=True)
 
 "---"
 
-f"""
-Highest mean: {df_describe.idxmax(axis="columns")["mean"]} ({df_describe.loc["mean",df_describe.idxmax(axis="columns")["mean"]]}) 
-Highest min: {df_describe.idxmax(axis="columns")["min"]} ({df_describe.loc["min",df_describe.idxmax(axis="columns")["min"]]}) 
-Highest max: {df_describe.idxmax(axis="columns")["max"]} ({df_describe.loc["max",df_describe.idxmax(axis="columns")["max"]]})
-Lowest std: {df_describe.idxmin(axis="columns")["std"]} ({df_describe.loc["std",df_describe.idxmin(axis="columns")["std"]]}) 
-"""
+# f"""
+# Highest mean: {df_describe.idxmax(axis="columns")["mean"]} ({df_describe.loc["mean",df_describe.idxmax(axis="columns")["mean"]]}) 
+# Highest min: {df_describe.idxmax(axis="columns")["min"]} ({df_describe.loc["min",df_describe.idxmax(axis="columns")["min"]]}) 
+# Highest max: {df_describe.idxmax(axis="columns")["max"]} ({df_describe.loc["max",df_describe.idxmax(axis="columns")["max"]]})
+# Lowest std: {df_describe.idxmin(axis="columns")["std"]} ({df_describe.loc["std",df_describe.idxmin(axis="columns")["std"]]}) 
+# """
 
+"""
+ksjhdbckasjhbc
+akdsclasc
+cachas
+"""
 "---"
 
-mod, test_size = df_describe.idxmax(axis="columns")["mean"]
+mod = st.sidebar.selectbox(
+  "Chose model",
+  list(dict_model.keys()),
+  index=None,
+  placeholder="Select a model...",
+)
+
+if mod is not None:
+  model = dict_model[mod]
+
+else:
+  st.stop()
+  
+test_size = st.number_input("Insert a number", value=None, placeholder="Type a number...",
+                            min_value = 0.1, max_value = 0.4, value  = 0.1, step = 0.1)
 
 # balance the dataset
-df_grouped_by = dataset.groupby(["fetal_health"])
+df_grouped_by = dataset.groupby(label)
 df_balanced = df_grouped_by.apply(lambda x: x.sample(df_grouped_by.size().min()).reset_index(drop=True))
-df_balanced = df_balanced.droplevel(["fetal_health"])
+df_balanced = df_balanced.droplevel(label)
 
 le = LabelEncoder()
-Y = le.fit_transform(df_balanced.pop("fetal_health"))
+Y = le.fit_transform(df_balanced.pop(label)
 
 standard = StandardScaler()
 df_cont = df_balanced.select_dtypes(exclude="object")
@@ -165,12 +184,10 @@ df_lab = encoder.fit_transform(df_lab).toarray()
 
 X = np.concatenate((df_cont,df_lab), axis=1)
 
-
 # split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=test_size, random_state=None)
 
 # fit model no training data
-model = dict_model[mod]
 model.fit(X_train, y_train)
 
 # make predictions for test data
