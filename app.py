@@ -11,12 +11,16 @@ from sklearn import tree
 import numpy as np
 import streamlit as st
 
-
-uploaded_file = st.sidebar.file_uploader("Choose a file")
-if uploaded_file is not None:
+@st.cache_data
+def fetch_and_data(dataset):
   dataset = pd.read_csv(uploaded_file)
+  return dataset
   
-  dataset
+uploaded_file = st.sidebar.file_uploader("Choose a file")
+
+if uploaded_file is not None:
+
+  dataset = fetch_data(uploaded_file)
 
 else:
   st.stop()
