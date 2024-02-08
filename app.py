@@ -12,7 +12,7 @@ import numpy as np
 import streamlit as st
 
 
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
   dataset = pd.read_csv(uploaded_file)
   
@@ -22,7 +22,7 @@ else:
   st.stop()
 
 
-label = st.selectbox(
+label = st.sidebar.selectbox(
    "Chose the Label variable",
   list(dataset.columns),
    index=None,
