@@ -20,5 +20,5 @@ if uploaded_file is not None:
   
   dataframe
 
-  pr = df.profile_report()
+  pr = dataframe.profile_report()
 
