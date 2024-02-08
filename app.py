@@ -23,7 +23,7 @@ else:
 
 option = st.selectbox(
    "Chose the Label variable",
-    list(dataset.columns()),
+    list(dataset.columns),
    index=None,
    placeholder="Select a label...",
 )
