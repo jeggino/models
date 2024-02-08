@@ -15,6 +15,10 @@ import streamlit as st
 def fetch_data(uploaded_file):
   dataset = pd.read_csv(uploaded_file)
   return dataset
+
+  if st.button("Clear All"):
+    # Clears all st.cache_resource caches:
+    st.cache_resource.clear()
   
 uploaded_file = st.sidebar.file_uploader("Choose a file")
 
