@@ -12,7 +12,7 @@ import numpy as np
 import streamlit as st
 
 @st.cache_data
-def fetch_and_data(uploaded_file):
+def fetch_data(uploaded_file):
   dataset = pd.read_csv(uploaded_file)
   return dataset
   
