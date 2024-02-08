@@ -22,3 +22,6 @@ if uploaded_file is not None:
 
   pr = dataframe.profile_report()
 
+  st_profile_report(pr)
+
+
