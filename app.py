@@ -88,7 +88,7 @@ for models in dict_model.keys():
         
         ac = []
         
-        for _ in range(5):
+        for _ in range(1):
 
             # split data into train and test sets
             X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=test_size, random_state=None)
