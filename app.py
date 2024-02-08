@@ -10,17 +10,20 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn import tree
 import numpy as np
 import streamlit as st
-import pandas_profiling
-from streamlit_pandas_profiling import st_profile_report
+
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-  df = pd.read_csv(uploaded_file)
+  dataframe = pd.read_csv(uploaded_file)
   
-  df
+  dataframe
 
+  import pandas_profiling  
+  from streamlit_pandas_profiling import st_profile_report
+  
+  df = pd.read_csv("https://storage.googleapis.com/tf-datasets/titanic/train.csv")
   pr = df.profile_report()
-
+  
   st_profile_report(pr)
 
 
