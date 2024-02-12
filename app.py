@@ -170,10 +170,8 @@ df_grouped_by = dataset.groupby(label)
 df_balanced = df_grouped_by.apply(lambda x: x.sample(df_grouped_by.size().min()).reset_index(drop=True))
 df_balanced = df_balanced.droplevel(label)
 
-le = LabelEncoder()
-Y = le.fit_transform(df_balanced.pop(label)
 
-standard = StandardScaler()
+Y = le.fit_transform(df_balanced.pop(label)
 df_cont = df_balanced.select_dtypes(exclude="object")
 df_cont = standard.fit_transform(df_cont)
 
