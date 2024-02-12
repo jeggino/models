@@ -88,7 +88,7 @@ for models in dict_model.keys():
         
         ac = []
         
-        for _ in range(1):
+        for _ in range(5):
 
             # split data into train and test sets
             X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=test_size, random_state=None)
@@ -118,15 +118,15 @@ df_describe
 
 import altair as alt
 
-source = df.melt()
+source = df.melt(var_name=["Model","Test size"],value_name="Accuracy")
 
-source["value"] = source["value"]*100
+source["Accuracy"] = source["Accuracy"]*100
 
 box = alt.Chart(source).mark_boxplot(extent='min-max',size=30,).encode(
-    x=alt.X("variable_1:N",title=""),
-    y=alt.Y('value:Q',scale=alt.Scale(zero=False),title=""),
-    color=alt.Color("variable_0:N").legend(None),
-    column='variable_0:N'
+    x=alt.X("Test size:N",title=""),
+    y=alt.Y('Accuracy:Q',scale=alt.Scale(zero=False),title=""),
+    color=alt.Color("Model:N").legend(None),
+    column='Model:N'
 ).properties(width=150,height=300).configure_axis(
     labelFontSize=10,
 )
