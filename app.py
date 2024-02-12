@@ -162,34 +162,3 @@ if mod is not None:
 else:
   st.stop()
   
-test_size = st.number_input("Insert a number", value=None, placeholder="Type a number...",
-                            min_value = 0.1, max_value = 0.4, value  = 0.1, step = 0.1)
-
-# balance the dataset
-df_grouped_by = dataset.groupby(label)
-df_balanced = df_grouped_by.apply(lambda x: x.sample(df_grouped_by.size().min()).reset_index(drop=True))
-df_balanced = df_balanced.droplevel(label)
-
-
-Y = le.fit_transform(df_balanced.pop(label)
-df_cont = df_balanced.select_dtypes(exclude="object")
-df_cont = standard.fit_transform(df_cont)
-
-
-encoder = OneHotEncoder()
-df_lab = df_balanced.select_dtypes(include="object")
-df_lab = encoder.fit_transform(df_lab).toarray()
-
-X = np.concatenate((df_cont,df_lab), axis=1)
-
-# split data into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=test_size, random_state=None)
-
-# fit model no training data
-model.fit(X_train, y_train)
-
-# make predictions for test data
-y_pred = model.predict(X_test)
-
-f"Test size: {test_size}, model: {mod}"
-pd.crosstab(le.inverse_transform(y_pred),le.inverse_transform(y_test), rownames=['Pred'], colnames=["Real"])
