@@ -122,16 +122,16 @@ source = df.melt(var_name=["Model","Test size"],value_name="Accuracy")
 
 source["Accuracy"] = source["Accuracy"]*100
 
-box = alt.Chart(source).mark_boxplot(extent='min-max',size=30,).encode(
-    x=alt.X("Test size:N",title=""),
-    y=alt.Y('Accuracy:Q',scale=alt.Scale(zero=False),title=""),
-    color=alt.Color("Model:N").legend(None),
-    column='Model:N'
-).properties(width=150,height=300).configure_axis(
-    labelFontSize=10,
-)
+# box = alt.Chart(source).mark_boxplot(extent='min-max',size=30,).encode(
+#     x=alt.X("Test size:N",title=""),
+#     y=alt.Y('Accuracy:Q',scale=alt.Scale(zero=False),title=""),
+#     color=alt.Color("Model:N").legend(None),
+#     column='Model:N'
+# ).properties(width=150,height=300).configure_axis(
+#     labelFontSize=10,
+# )
 
-st.altair_chart(box, use_container_width=True)
+# st.altair_chart(box, use_container_width=True)
 
 "---"
 
